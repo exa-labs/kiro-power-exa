@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "exa": {
+      "url": "https://mcp.exa.ai/mcp?client=kiro-power",
+      "headers": {
+        "x-api-key": "${EXA_API_KEY}",
+        "x-exa-source": "kiro-power"
+      },
+      "disabled": false,
+      "disabledTools": []
+    }
+  }
+}
