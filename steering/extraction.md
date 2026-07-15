@@ -21,7 +21,28 @@ web_fetch_exa {
 }
 ```
 
-Batch up to 5-10 URLs per fetch call to minimize round trips. Leave `maxCharacters` at its default unless a page is unusually long; the point is to understand full page context, not to truncate aggressively.
+Batch up to 5-10 URLs per fetch call to minimize round trips. `web_fetch_exa`'s `maxCharacters` defaults to 3000, which truncates longer pages after the top section — raise it (e.g. 8000-15000) whenever you need full page context rather than just the opening.
+
+## Content Controls on `web_search_advanced_exa`
+
+`web_search_exa` always returns highlights. On `web_search_advanced_exa`, pick ONE content mode per call rather than stacking them:
+
+- **Highlights (default)** — `enableHighlights: true`. Best for agent workflows: query-relevant excerpts at low token cost. Let Exa pick the length; only set `highlightsMaxCharacters` for a fixed budget, and keep it above ~400 (smaller truncates too aggressively to be useful downstream).
+- **Text** — set `textMaxCharacters` only when you need broad page context beyond excerpts; it costs more tokens than highlights.
+- **Summary** — `enableSummary: true` only when you explicitly want Exa-side synthesis. It fires a per-result LLM call, so N results means N extra synthesis steps and added latency; use sparingly.
+
+Stacking text + highlights bills for two views of the same page, and adding summary on top adds the per-result LLM cost. Default to highlights and escalate only when they're insufficient — then `web_fetch_exa` the best URLs for full text.
+
+### Freshness
+
+Control cache vs live-crawl with `maxAgeHours`:
+
+- omit it — cache-first with live fallback (good default)
+- small value (e.g. `24`) — for news, launches, and live market/policy updates
+- `0` — always live-crawl (slowest; only when real-time freshness is essential)
+- `-1` — cache-only (fastest; for latency-critical paths)
+
+Set `livecrawlTimeout` (milliseconds) whenever a live crawl might be triggered so slow pages don't stall the call.
 
 ## Extracting into a Schema
 

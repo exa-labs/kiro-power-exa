@@ -3,7 +3,7 @@
 Three search tools are available to a Kiro agent:
 
 - **`web_search_exa`**: search by natural-language query. Supports `query` and `numResults`. Use `category:<type>` inline in the query string for category filtering.
-- **`web_search_advanced_exa`**: same backend with explicit filters (`includeDomains`, `excludeDomains`, `startPublishedDate`, `endPublishedDate`, `category`, `userLocation`), plus configurable summaries, highlights, and subpage crawling. Reach for this when you need domain or date constraints that `category:` alone can't express.
+- **`web_search_advanced_exa`**: same backend with explicit filters (`includeDomains`, `excludeDomains`, `startPublishedDate`/`endPublishedDate`, `startCrawlDate`/`endCrawlDate`, `includeText`/`excludeText`, `category`, `userLocation`) and a `type` selector (`auto` — the default, works with all filters — plus `fast` and `instant` for lower latency), along with configurable summaries, highlights, and subpage crawling. Reach for this when you need domain, date, or text constraints that `category:` alone can't express. Its `category` accepts a wider set than the inline form: `company`, `people`, `research paper`, `news`, `personal site`, `financial report`, `pdf`, `github`.
 - **`web_fetch_exa`**: read full content from known URLs. Use after search when snippets are insufficient. See `extraction.md` in this directory.
 
 For filtering extracted results against task criteria, see `filtering.md`.
@@ -32,7 +32,7 @@ Write queries as natural grammatical phrases.
 | Precise filter (narrow category + constraints) | 5-8 | `"category:company developer tools API testing Series A"` |
 | Broad discovery (wide category, few constraints) | 10 | `"category:news engineer launches startup 2025 2026"` |
 
-Cap `numResults` at 10. If you need more coverage, run additional queries with different angles rather than pushing a single query higher; larger result sets return diminishing signal and more noise.
+`web_search_advanced_exa` accepts `numResults` up to 100, but prefer keeping it at 10 or below: run additional queries with different angles rather than pushing a single query higher, since larger result sets return diminishing signal and more noise.
 
 **Use category filters** when searching for a specific entity type. Inline categories available to `web_search_exa`: `company`, `research paper`, `news`, `personal site`, `people`. Add `category:<type>` at the start of the query string.
 
@@ -52,6 +52,15 @@ web_search_advanced_exa {
   "numResults": 10
 }
 ```
+
+## Category Filter Restrictions
+
+The `company` and `people` categories reject most filters — passing an unsupported filter returns `400 Invalid request body`:
+
+- `company`: no date or crawl-date filters (`startPublishedDate` / `endPublishedDate` / `startCrawlDate` / `endCrawlDate`). `excludeDomains` and `userLocation` are allowed.
+- `people`: no date/crawl-date filters and no `excludeDomains`; `includeDomains` only accepts LinkedIn domains. Push role, company, seniority, and location constraints into the query text instead.
+
+Other categories (`news`, `research paper`, `personal site`, `financial report`, `pdf`, `github`) accept domain and date filters normally.
 
 ## Query Diversity
 

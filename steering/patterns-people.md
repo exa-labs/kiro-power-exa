@@ -2,6 +2,8 @@
 
 Use `category:people` for LinkedIn-weighted results. For discovery queries, be specific; vague queries like `"category:people researcher founder CEO startup"` will match many irrelevant LinkedIn profiles. Include specific companies, timeframes, or roles to narrow results.
 
+The `people` category rejects date filters and `excludeDomains` (both return a 400), and `includeDomains` only accepts LinkedIn domains. Put role, company, seniority, and location constraints in the query text rather than in `web_search_advanced_exa` filters.
+
 ```
 // By company + role
 web_search_exa { "query": "category:people engineer at OpenAI", "numResults": 10 }

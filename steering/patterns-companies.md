@@ -36,13 +36,15 @@ For strict category + stage + date + geography filters, move to `web_search_adva
 web_search_advanced_exa {
   "query": "developer tools for API testing",
   "category": "company",
-  "startPublishedDate": "2024-01-01",
   "userLocation": "US",
+  "excludeDomains": ["crunchbase.com", "pitchbook.com"],
   "numResults": 10
 }
 ```
 
-(Advanced search `numResults` also capped at 10; run multiple angles if you need broader coverage.)
+(Advanced search accepts `numResults` up to 100, but running several focused angles gives better coverage than one large query.)
+
+The `company` category rejects date filters (`startPublishedDate` / `endPublishedDate`) with a 400 error. To constrain company results by recency, run a separate `news` or uncategorized dated search and dedupe against your company list rather than adding dates to a `category: company` call.
 
 ## Deduplication
 
