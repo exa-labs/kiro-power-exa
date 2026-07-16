@@ -32,7 +32,7 @@ Write queries as natural grammatical phrases.
 | Precise filter (narrow category + constraints) | 5-8 | `"category:company developer tools API testing Series A"` |
 | Broad discovery (wide category, few constraints) | 10 | `"category:news engineer launches startup 2025 2026"` |
 
-`web_search_advanced_exa` accepts `numResults` up to 100, but prefer keeping it at 10 or below: run additional queries with different angles rather than pushing a single query higher, since larger result sets return diminishing signal and more noise.
+Cap `numResults` at 10. If you need more coverage, run additional queries with different angles rather than pushing a single query higher; larger result sets return diminishing signal and more noise.
 
 **Use category filters** when searching for a specific entity type. Inline categories available to `web_search_exa`: `company`, `research paper`, `news`, `personal site`, `people`. Add `category:<type>` at the start of the query string.
 
