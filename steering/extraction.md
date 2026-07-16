@@ -29,9 +29,8 @@ Batch up to 5-10 URLs per fetch call to minimize round trips. `web_fetch_exa`'s 
 
 - **Highlights (default)** — `enableHighlights: true`. Best for agent workflows: query-relevant excerpts at low token cost. Let Exa pick the length; only set `highlightsMaxCharacters` for a fixed budget, and keep it above ~400 (smaller truncates too aggressively to be useful downstream).
 - **Text** — set `textMaxCharacters` only when you need broad page context beyond excerpts; it costs more tokens than highlights.
-- **Summary** — `enableSummary: true` only when you explicitly want Exa-side synthesis. It fires a per-result LLM call, so N results means N extra synthesis steps and added latency; use sparingly.
 
-Stacking text + highlights bills for two views of the same page, and adding summary on top adds the per-result LLM cost. Default to highlights and escalate only when they're insufficient — then `web_fetch_exa` the best URLs for full text.
+Stacking text + highlights bills for two views of the same page. Default to highlights and escalate only when they're insufficient — then `web_fetch_exa` the best URLs for full text.
 
 ### Freshness
 
