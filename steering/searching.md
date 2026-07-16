@@ -3,7 +3,7 @@
 Three search tools are available to a Kiro agent:
 
 - **`web_search_exa`**: search by natural-language query. Supports `query` and `numResults`. Use `category:<type>` inline in the query string for category filtering.
-- **`web_search_advanced_exa`**: same backend with explicit filters (`includeDomains`, `excludeDomains`, `startPublishedDate`/`endPublishedDate`, `category`, `userLocation`) and a `type` selector (`auto` — the default, works with all filters — plus `fast` and `instant` for lower latency), along with configurable summaries, highlights, and subpage crawling. Reach for this when you need domain, date, or text constraints that `category:` alone can't express. Its `category` accepts a wider set than the inline form: `company`, `people`, `research paper`, `news`, `personal site`, `financial report`, `pdf`, `github`.
+- **`web_search_advanced_exa`**: same backend with explicit filters (`includeDomains`, `excludeDomains`, `startPublishedDate`/`endPublishedDate`, `category`, `userLocation`) and a `type` selector (`auto` — the default, works with all filters — plus `fast` for lower latency), along with configurable highlights. Reach for this when you need domain, date, or text constraints that `category:` alone can't express. Its `category` accepts a wider set than the inline form: `company`, `research paper`, `news`, `personal site`, `financial report`, `people`.
 - **`web_fetch_exa`**: read full content from known URLs. Use after search when snippets are insufficient. See `extraction.md` in this directory.
 
 For filtering extracted results against task criteria, see `filtering.md`.
