@@ -60,7 +60,8 @@ The `company` and `people` categories reject most filters — passing an unsuppo
 - `company`: no date or crawl-date filters (`startPublishedDate` / `endPublishedDate` / `startCrawlDate` / `endCrawlDate`). `excludeDomains` and `userLocation` are allowed.
 - `people`: no date/crawl-date filters and no `excludeDomains`; `includeDomains` only accepts LinkedIn domains. Push role, company, seniority, and location constraints into the query text instead.
 
-Other categories (`news`, `research paper`, `personal site`, `financial report`, `pdf`, `github`) accept domain and date filters normally.
+Other categories (`news`, `research paper`, `personal site`, `financial report`) accept domain and date filters normally.
+company, research paper, news, personal site, financial report, people 
 
 ## Query Diversity
 
