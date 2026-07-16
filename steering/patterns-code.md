@@ -34,4 +34,3 @@ web_fetch_exa { "urls": ["https://nextjs.org/docs/app/api-reference/config/next-
 - Name the language, library, and version. "Python httpx retry on 429 with exponential backoff" beats "python http retry".
 - For error messages, include the key phrase verbatim plus the framework name. "next.js 15 hydration mismatch server client" returns better than the error alone.
 - When you need a runnable example, ask for it: "code example", "minimal reproducible example", "runnable snippet".
-- For low-latency lookups, call `web_search_advanced_exa` with `"type": "fast"`; its `category` also supports `github` and `pdf` for scoping to repositories or PDF docs.
